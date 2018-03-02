@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <h1>Hello, {{request.session.first}}! </h1>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Plan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trip in trips %}
+            <tr>
+                <td>
+                    <a href="{{trip.id}}/show">{{trip.destination}}</a>
+                </td>
+                <br>
+                <td>{{trip.startDate}}</td>
+                <br>
+                <td>{{trip.endDate}}</td>
+                <br>
+                <td>{{trip.description}}</td>
+                <td>
+                <a href="{{trip.id}}/remove">Nevermind</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <table>
+        <h2>OTHER USERS' TRAVEL PLANS</h2>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>DESTINATION</th>
+                <th>TRAVEL START DATE</th>
+                <th>TRAVEL END DATE</th>
+                <th>JOIN</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for othersTrips in othersTrips %}
+            <tr>
+                <td>{{othersTrips.userAdded.first}}</td>
+                
+                <td> <a href="{{othersTrips.id}}/show"> {{othersTrips.destination}}</a>  </td>
+        
+                <th>{{othersTrips.startDate}}</th>
+                <th>{{othersTrips.endDate}}</th>
+                <th><a href="/examThree/{{othersTrips.id}}/addfave">  Join </a> </th>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button>
+        <a href="/examThree/add">ADD A TRIP</a>
+    </button>
+
+
+
+    <button>
+            <a href="{%url 'loginreg:LR_logout'%}">Logout</a>
+    </button>
+    
+
+</body>
+
+</html>

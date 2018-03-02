@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    
+   
+        <h1>{{trip.destination}}</h1>
+
+        <p>Planned By: {{trip.userAdded.first}}</p>
+        <p>Description: {{trip.description}} </p>
+        <p>Travel Date From: {{trip.startDate}}</p>
+        <p>Travel Date To: {{trip.endDate}}</p>
+   
+
+    <h3>Other users joining this trip:</h3>
+    {% for user in trip.favorites.all %}
+        <p>{{user.first}}</p>
+      
+    {% endfor %}
+
+
+    <a href="{%url 'examThree:index' %}">Back to Trip Dashboard</a></button>
+</body>
+</html>

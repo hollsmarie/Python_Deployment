@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django Login and Registration Form</title>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <h1>Registration</h1>
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+        <div id="form">
+            <form action='/register' method='POST'>
+                {% csrf_token %}
+                First Name<input type='text' name='first'> 
+                Last Name<input type='text' name='last'> 
+                Email:<input type="email" name="email">
+                Password:<input type="password" name="password">
+                <input type="hidden" name="action" value="register"> 
+                Confirm Password:<input type="password" name="confirm">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <h1>Login</h1>
+
+        {% if form.errors %}
+        <p>username or password not correct</p>
+        {% endif %}
+    
+
+        <form action='/login' method='POST'>
+            {% csrf_token %}
+            Email:<input type="email" name="email">
+            Password:<input type="password" name="password">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
+</html>

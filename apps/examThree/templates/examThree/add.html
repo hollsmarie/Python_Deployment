@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello! Where would you like to go?</h1>
+        <form action="/examThree/update" method='POST'>
+            {% csrf_token %} 
+            DESTINATION: <input type="text" name="destination" value="{{trip.destination}}"> 
+            DESCRIPTION: <input type="text" name="description" value="{{trip.tripDescription}}"> 
+            TRAVEL START:<input type="date" name="startDate" value="{{trip.tripStart}}"> 
+            TRAVEL END: <input type="date" name="endDate" value="{{task.tripEnd}}"> 
+            <input type="submit" value="Add">
+           </form>
+           
+           {% if messages %}
+           <ul class="messages">
+               {% for message in messages %}
+               <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                   {% endfor %}
+           </ul>
+           {% endif %}
+    <a href="{%url 'examThree:index' %}">Back to Dashboard</a>
+</body>
+</html>
